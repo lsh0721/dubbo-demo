@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.2.1.RELEASE</version>
+    </parent>
+
+    <groupId>com.dubbo.demo.provider</groupId>
+    <artifactId>dubbo-demo-provider-parent</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <name>dubbo-demo-provider-parent</name>
+    <packaging>pom</packaging>
+
+    <modules>
+        <module>dubbo-demo-api</module>
+        <module>dubbo-demo-common</module>
+        <module>dubbo-demo-service</module>
+        <module>dubbo-demo-web</module>
+    </modules>
+
+    <properties>
+        <dubbo.demo.version>0.0.1-SNAPSHOT</dubbo.demo.version>
+        <java.version>1.8</java.version>
+        <spring.boot.version>2.2.1.RELEASE</spring.boot.version>
+        <apache.dubbo.spring.boot.starter.vsersion>2.7.3</apache.dubbo.spring.boot.starter.vsersion>
+        <dubbo.dependencies.zookeeper.vsersion>2.7.4</dubbo.dependencies.zookeeper.vsersion>
+    </properties>
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>com.dubbo.demo.provider</groupId>
+                <artifactId>dubbo-demo-api</artifactId>
+                <version>${dubbo.demo.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.dubbo.demo.provider</groupId>
+                <artifactId>dubbo-demo-common</artifactId>
+                <version>${dubbo.demo.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.dubbo.demo.provider</groupId>
+                <artifactId>dubbo-demo-service</artifactId>
+                <version>${dubbo.demo.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.dubbo.demo.provider</groupId>
+                <artifactId>dubbo-demo-web</artifactId>
+                <version>${dubbo.demo.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter</artifactId>
+                <version>${spring.boot.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-web</artifactId>
+                <version>${spring.boot.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.dubbo</groupId>
+                <artifactId>dubbo-spring-boot-starter</artifactId>
+                <version>${apache.dubbo.spring.boot.starter.vsersion}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.dubbo</groupId>
+                <artifactId>dubbo-dependencies-zookeeper</artifactId>
+                <version>${dubbo.dependencies.zookeeper.vsersion}</version>
+                <type>pom</type>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-test</artifactId>
+                <version>${spring.boot.version}</version>
+                <scope>test</scope>
+                <exclusions>
+                    <exclusion>
+                        <groupId>org.junit.vintage</groupId>
+                        <artifactId>junit-vintage-engine</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+</project>
