@@ -11,6 +11,8 @@
 package com.dubbo.demo.provider.service.impl;
 
 import com.dubbo.demo.provider.api.HelloService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * 〈一句话功能简述〉
@@ -23,8 +25,13 @@ import com.dubbo.demo.provider.api.HelloService;
  */
 public class HelloServiceImpl implements HelloService {
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(HelloServiceImpl.class);
+
     @Override
     public String sayHello(String userName) {
-        return "dubbo-demo-service say hello :" + userName;
+        LOGGER.info("HelloServiceImpl.sayHello start userName:{}", userName);
+        String result = "dubbo-demo-service say hello :" + userName;
+        LOGGER.info("HelloServiceImpl.sayHello end");
+        return result;
     }
 }

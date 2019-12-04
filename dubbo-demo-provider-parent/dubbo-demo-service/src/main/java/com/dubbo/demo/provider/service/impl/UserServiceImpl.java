@@ -12,6 +12,8 @@ package com.dubbo.demo.provider.service.impl;
 
 import com.dubbo.demo.provider.api.UserService;
 import com.dubbo.demo.provider.dmo.User;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,8 +29,11 @@ import java.util.List;
  */
 public class UserServiceImpl implements UserService {
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(UserServiceImpl.class);
+
     @Override
     public List<User> queryAllUser() {
+        LOGGER.info("UserServiceImpl.queryAllUser start");
         List<User> userList = new ArrayList<>();
         User user1 = new User();
         user1.setUserName("张三");
@@ -38,11 +43,14 @@ public class UserServiceImpl implements UserService {
         user2.setAddress("北京");
         userList.add(user1);
         userList.add(user2);
+        LOGGER.info("UserServiceImpl.queryAllUser end");
         return userList;
     }
 
     @Override
     public void deleteUser(String userName) {
-
+        LOGGER.info("UserServiceImpl.deleteUser start");
+        LOGGER.info("doing delete user......");
+        LOGGER.info("UserServiceImpl.deleteUser end");
     }
 }
