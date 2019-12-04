@@ -9,5 +9,5 @@
     <bean id="helloService" class="com.dubbo.demo.provider.service.impl.HelloServiceImpl"/>
     <bean id="userService" class="com.dubbo.demo.provider.service.impl.UserServiceImpl"/>
     <dubbo:service interface="com.dubbo.demo.provider.api.HelloService" ref="helloService"/>
-    <dubbo:service interface="com.dubbo.demo.provider.api.UserService" ref="userService"/>
+    <dubbo:service interface="com.dubbo.demo.provider.api.UserService" ref="userService" loadbalance="roundrobin"/>
 </beans>
