@@ -34,6 +34,12 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<User> queryAllUser() {
         LOGGER.info("UserServiceImpl.queryAllUser start");
+/*        try {
+            //休眠1s 测试 LeastActive LoadBalance策略
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }*/
         List<User> userList = new ArrayList<>();
         User user1 = new User();
         user1.setUserName("张三");
