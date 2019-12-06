@@ -4,10 +4,22 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
        http://dubbo.apache.org/schema/dubbo http://dubbo.apache.org/schema/dubbo/dubbo.xsd">
     <dubbo:application name="dubbo-demo-provider"/>
-    <dubbo:registry address="zookeeper://127.0.0.1:2181"/>
+    <dubbo:registry id="local" address="zookeeper://127.0.0.1:2181"/>
+    <!--多注册中心配置
+    <dubbo:registry id="local" address="zookeeper://127.0.0.1:2181"/>
+    <dubbo:registry id="zyc" address="zookeeper://10.19.41.133:2181" default="false"/>
+    -->
+
     <dubbo:protocol name="dubbo" port="20880"/>
+    <!--多协议
+    <dubbo:protocol name="rmi" port="1099" />-->
     <bean id="helloService" class="com.dubbo.demo.provider.service.impl.HelloServiceImpl"/>
     <bean id="userService" class="com.dubbo.demo.provider.service.impl.UserServiceImpl"/>
+    <bean id="newUserService" class="com.dubbo.demo.provider.service.impl.NewUserServiceImpl"/>
+
     <dubbo:service interface="com.dubbo.demo.provider.api.HelloService" ref="helloService"/>
-    <dubbo:service interface="com.dubbo.demo.provider.api.UserService" ref="userService" loadbalance="leastactive"/>
+    <dubbo:service interface="com.dubbo.demo.provider.api.UserService" ref="userService"/>
+
+    <dubbo:service interface="com.dubbo.demo.provider.api.UserService" ref="newUserService" version="1.0.0"/>
+    <!--<dubbo:service group="user" interface="com.dubbo.demo.provider.api.UserService" ref="userService"/>-->
 </beans>

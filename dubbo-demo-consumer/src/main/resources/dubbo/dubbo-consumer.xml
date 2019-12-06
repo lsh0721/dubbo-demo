@@ -4,15 +4,24 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
        http://dubbo.apache.org/schema/dubbo http://dubbo.apache.org/schema/dubbo/dubbo.xsd">
     <dubbo:application name="dubbo-demo-consumer"/>
-   <!-- <dubbo:registry address="zookeeper://127.0.0.1:2181" />-->
+    <dubbo:registry address="zookeeper://127.0.0.1:2181" />
     <!--只订阅，禁用注册
     <dubbo:registry address="zookeeper://127.0.0.1:2181" register="false"/>
     <dubbo:protocol name="dubbo" port="20883"/>
     <bean id="consumerService" class="com.dubbo.demo.consumer.service.impl.ConsumerServiceImpl"/>
     <dubbo:service interface="com.dubbo.demo.consumer.service.ConsumerService" ref="consumerService" />-->
 
-    <dubbo:reference id="helloService" check="false" interface="com.dubbo.demo.provider.api.HelloService"/>
-    <!--直连模式调用-->
-    <!--<dubbo:reference id="userService" check="false" interface="com.dubbo.demo.provider.api.UserService" url="dubbo://127.0.0.1:20880" />-->
-    <dubbo:reference id="userService" check="false" interface="com.dubbo.demo.provider.api.UserService"/>
+    <!--只注册，禁止订阅
+    <dubbo:registry address="zookeeper://127.0.0.1:2181" subscribe="false"/>
+    <dubbo:protocol name="dubbo" port="20883"/>
+    <bean id="consumerService" class="com.dubbo.demo.consumer.service.impl.ConsumerServiceImpl"/>
+    <dubbo:service interface="com.dubbo.demo.consumer.service.ConsumerService" ref="consumerService"/>-->
+
+    <!--直连模式调用
+        <dubbo:reference id="userService" check="false" interface="com.dubbo.demo.provider.api.UserService" url="dubbo://127.0.0.1:20880" />-->
+    <dubbo:reference id="helloService" interface="com.dubbo.demo.provider.api.HelloService"/>
+    <dubbo:reference id="userService" interface="com.dubbo.demo.provider.api.UserService"/>
+    <!--服务分组
+    <dubbo:reference id="userService" group="user" interface="com.dubbo.demo.provider.api.UserService"/>-->
+
 </beans>
