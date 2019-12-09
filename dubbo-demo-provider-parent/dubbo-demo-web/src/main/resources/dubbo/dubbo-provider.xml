@@ -22,4 +22,15 @@
 
     <dubbo:service interface="com.dubbo.demo.provider.api.UserService" ref="newUserService" version="1.0.0"/>
     <!--<dubbo:service group="user" interface="com.dubbo.demo.provider.api.UserService" ref="userService"/>-->
+
+    <!--分组聚合-->
+    <bean id="mergerUserServiceA" class="com.dubbo.demo.provider.service.impl.MergerUserServiceAImpl"/>
+    <bean id="mergerUserServiceB" class="com.dubbo.demo.provider.service.impl.MergerUserServiceBImpl"/>
+    <dubbo:service interface="com.dubbo.demo.provider.api.MergerUserService" ref="mergerUserServiceA" group="A"/>
+    <dubbo:service interface="com.dubbo.demo.provider.api.MergerUserService" ref="mergerUserServiceB" group="B"/>
+
+    <!--泛化实现-->
+    <bean id="barService" class="com.dubbo.demo.provider.service.impl.BarServiceImpl"/>
+    <dubbo:service interface="com.dubbo.demo.provider.api.BarService" ref="barService"  generic="true"/>
+
 </beans>
