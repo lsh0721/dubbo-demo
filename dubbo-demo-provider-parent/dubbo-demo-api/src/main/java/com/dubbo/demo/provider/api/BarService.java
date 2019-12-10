@@ -10,8 +10,6 @@
  */
 package com.dubbo.demo.provider.api;
 
-import com.dubbo.demo.provider.dmo.User;
-
 import java.util.Map;
 
 /**

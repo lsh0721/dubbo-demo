@@ -14,6 +14,7 @@ import com.dubbo.demo.provider.api.HelloService;
 import com.dubbo.demo.provider.api.MergerUserService;
 import com.dubbo.demo.provider.api.UserService;
 import com.dubbo.demo.provider.dmo.User;
+import org.apache.dubbo.rpc.service.EchoService;
 import org.apache.dubbo.rpc.service.GenericService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
@@ -73,13 +74,33 @@ public class ConsumerController {
 
     @RequestMapping("saveUserForGeneric.do")
     public Map<String, Object> saveUserForGeneric() {
-
+        /**XML配置的接口泛化调用**/
         GenericService barService = (GenericService) applicationContext.getBean("barService");
         Map<String, Object> request = new HashMap<>();
         request.put("userName", "11111");
         request.put("address", "22222");
         Object response = barService.$invoke("saveUser", new String[]{"java.util.Map"}, new Object[]{request});
         return (Map<String, Object>) response;
+
+        /**api方式的接口泛化调用
+         ReferenceConfig<GenericService> reference = new ReferenceConfig<GenericService>();
+         reference.setInterface("com.dubbo.demo.provider.api.BarService");
+         reference.setGeneric(true);
+         GenericService genericService = reference.get();
+         Map<String, Object> request = new HashMap<>();
+         request.put("userName", "11111");
+         request.put("address", "22222");
+         Map<String, Object> response = (Map<String, Object>) genericService.$invoke("saveUser",
+         new String[]{"java.util.Map"}, new Object[]{request});
+         return response;**/
+    }
+
+    @RequestMapping("echo.do")
+    public String echo() {
+        EchoService echoService = (EchoService) helloService;
+        String status = (String) echoService.$echo("hello");
+        assert(status.equals("hello"));
+        return status;
     }
 
 }

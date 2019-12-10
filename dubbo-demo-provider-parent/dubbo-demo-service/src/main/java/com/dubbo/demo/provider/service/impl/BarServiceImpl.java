@@ -11,7 +11,6 @@
 package com.dubbo.demo.provider.service.impl;
 
 import com.dubbo.demo.provider.api.BarService;
-import com.dubbo.demo.provider.dmo.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

@@ -31,6 +31,6 @@
 
     <!--泛化实现-->
     <bean id="barService" class="com.dubbo.demo.provider.service.impl.BarServiceImpl"/>
-    <dubbo:service interface="com.dubbo.demo.provider.api.BarService" ref="barService"  generic="true"/>
+    <dubbo:service interface="com.dubbo.demo.provider.api.BarService" ref="barService"/>
 
 </beans>
