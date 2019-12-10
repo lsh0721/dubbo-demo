@@ -27,5 +27,10 @@
     <dubbo:reference id="mergerUserService" group="B,A" interface="com.dubbo.demo.provider.api.MergerUserService" merger="true"/>
 
     <!--泛化引用-->
-    <dubbo:reference id="barService" interface="com.dubbo.demo.provider.api.BarService" generic="true" />
+    <dubbo:reference id="barService" interface="com.dubbo.demo.provider.api.BarService" generic="true"/>
+
+    <!--异步调用-->
+    <dubbo:reference id="asyncService" timeout="10000" interface="com.dubbo.demo.provider.api.AsyncService">
+        <dubbo:method name="sayHello" async="true"/>
+    </dubbo:reference>
 </beans>

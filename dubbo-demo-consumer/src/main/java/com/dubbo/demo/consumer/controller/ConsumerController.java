@@ -10,12 +10,16 @@
  */
 package com.dubbo.demo.consumer.controller;
 
+import com.dubbo.demo.provider.api.AsyncService;
 import com.dubbo.demo.provider.api.HelloService;
 import com.dubbo.demo.provider.api.MergerUserService;
 import com.dubbo.demo.provider.api.UserService;
 import com.dubbo.demo.provider.dmo.User;
+import jdk.nashorn.internal.ir.ReturnNode;
 import org.apache.dubbo.rpc.service.EchoService;
 import org.apache.dubbo.rpc.service.GenericService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,6 +28,8 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutionException;
 
 /**
  * 〈一句话功能简述〉
@@ -38,6 +44,8 @@ import java.util.Map;
 @RequestMapping("hello")
 public class ConsumerController {
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(ConsumerController.class);
+
     @Autowired(required = false)
     private HelloService helloService;
 
@@ -46,6 +54,9 @@ public class ConsumerController {
 
     @Autowired(required = false)
     private MergerUserService mergerUserService;
+
+    @Autowired(required = false)
+    private AsyncService asyncService;
 
     @Autowired
     private ApplicationContext applicationContext;
@@ -66,12 +77,22 @@ public class ConsumerController {
         return userList;
     }
 
+    /**
+     * 分组聚合
+     *
+     * @return
+     */
     @RequestMapping("queryUserForMerger.do")
     public List<User> queryUserForMerger() {
         List<User> userList = mergerUserService.queryUserForMerger();
         return userList;
     }
 
+    /**
+     * 泛化调用
+     *
+     * @return
+     */
     @RequestMapping("saveUserForGeneric.do")
     public Map<String, Object> saveUserForGeneric() {
         /**XML配置的接口泛化调用**/
@@ -95,12 +116,41 @@ public class ConsumerController {
          return response;**/
     }
 
+    /**
+     * 回声测试
+     *
+     * @return
+     */
     @RequestMapping("echo.do")
     public String echo() {
         EchoService echoService = (EchoService) helloService;
         String status = (String) echoService.$echo("hello");
-        assert(status.equals("hello"));
+        assert (status.equals("hello"));
         return status;
+    }
+
+    /**
+     * 异步调用
+     *
+     * @return
+     */
+    @RequestMapping("async.do")
+    public String async() throws Exception {
+        //调用
+        LOGGER.info("异步调用开始...");
+        CompletableFuture<String> future = asyncService.sayHello("async call request");
+        //回调
+        future.whenComplete((v, t) -> {
+            if (t != null) {
+                t.printStackTrace();
+            } else {
+                LOGGER.info("异步执行结果:{}", v);
+            }
+        });
+        LOGGER.info("可以处理器其他逻辑");
+        // 早于结果输出
+        LOGGER.info("先与返回结果执行.");
+        return future.get();
     }
 
 }

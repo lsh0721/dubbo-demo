@@ -35,4 +35,7 @@
     <!--异步实现-->
     <bean id="asyncService" class="com.dubbo.demo.provider.service.impl.AsyncServiceImpl"/>
     <dubbo:service interface="com.dubbo.demo.provider.api.AsyncService" ref="asyncService"/>
+    <!--延迟暴露-->
+    <bean id="delayService" class="com.dubbo.demo.provider.service.impl.DelayServiceImpl"/>
+    <dubbo:service interface="com.dubbo.demo.provider.api.DelayService" ref="delayService" delay="20000"/>
 </beans>
