@@ -32,5 +32,7 @@
     <!--泛化实现-->
     <bean id="barService" class="com.dubbo.demo.provider.service.impl.BarServiceImpl"/>
     <dubbo:service interface="com.dubbo.demo.provider.api.BarService" ref="barService"/>
-
+    <!--异步实现-->
+    <bean id="asyncService" class="com.dubbo.demo.provider.service.impl.AsyncServiceImpl"/>
+    <dubbo:service interface="com.dubbo.demo.provider.api.AsyncService" ref="asyncService"/>
 </beans>
