@@ -16,6 +16,7 @@ import com.dubbo.demo.provider.api.MergerUserService;
 import com.dubbo.demo.provider.api.UserService;
 import com.dubbo.demo.provider.dmo.User;
 import jdk.nashorn.internal.ir.ReturnNode;
+import org.apache.dubbo.config.ReferenceConfig;
 import org.apache.dubbo.rpc.service.EchoService;
 import org.apache.dubbo.rpc.service.GenericService;
 import org.slf4j.Logger;
@@ -95,15 +96,15 @@ public class ConsumerController {
      */
     @RequestMapping("saveUserForGeneric.do")
     public Map<String, Object> saveUserForGeneric() {
-        /**XML配置的接口泛化调用**/
+        /**XML配置的接口泛化调用
         GenericService barService = (GenericService) applicationContext.getBean("barService");
         Map<String, Object> request = new HashMap<>();
         request.put("userName", "11111");
         request.put("address", "22222");
         Object response = barService.$invoke("saveUser", new String[]{"java.util.Map"}, new Object[]{request});
-        return (Map<String, Object>) response;
+        return (Map<String, Object>) response;**/
 
-        /**api方式的接口泛化调用
+        /**api方式的接口泛化调用**/
          ReferenceConfig<GenericService> reference = new ReferenceConfig<GenericService>();
          reference.setInterface("com.dubbo.demo.provider.api.BarService");
          reference.setGeneric(true);
@@ -113,7 +114,7 @@ public class ConsumerController {
          request.put("address", "22222");
          Map<String, Object> response = (Map<String, Object>) genericService.$invoke("saveUser",
          new String[]{"java.util.Map"}, new Object[]{request});
-         return response;**/
+         return response;
     }
 
     /**

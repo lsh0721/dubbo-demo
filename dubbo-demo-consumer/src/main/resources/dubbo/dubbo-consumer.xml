@@ -12,7 +12,7 @@
     <dubbo:service interface="com.dubbo.demo.consumer.service.ConsumerService" ref="consumerService" />-->
 
     <!--只注册，禁止订阅
-    <dubbo:registry address="zookeeper://127.0.0.1:2181" subscribe="false"/>
+    <dubbo:registry address="zookeeper://127.0.0.1:2181" register="false"/>
     <dubbo:protocol name="dubbo" port="20883"/>
     <bean id="consumerService" class="com.dubbo.demo.consumer.service.impl.ConsumerServiceImpl"/>
     <dubbo:service interface="com.dubbo.demo.consumer.service.ConsumerService" ref="consumerService"/>-->

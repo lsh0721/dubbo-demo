@@ -10,15 +10,16 @@
     <dubbo:registry id="zyc" address="zookeeper://10.19.41.133:2181" default="false"/>
     -->
 
+
     <dubbo:protocol name="dubbo" port="20880"/>
-    <!--多协议
-    <dubbo:protocol name="rmi" port="1099" />-->
+    <!--多协议-->
+    <dubbo:protocol name="rmi" port="1099" />
     <bean id="helloService" class="com.dubbo.demo.provider.service.impl.HelloServiceImpl"/>
     <bean id="userService" class="com.dubbo.demo.provider.service.impl.UserServiceImpl"/>
     <bean id="newUserService" class="com.dubbo.demo.provider.service.impl.NewUserServiceImpl"/>
 
     <dubbo:service interface="com.dubbo.demo.provider.api.HelloService" ref="helloService"/>
-    <dubbo:service interface="com.dubbo.demo.provider.api.UserService" ref="userService"/>
+    <dubbo:service interface="com.dubbo.demo.provider.api.UserService" ref="userService" loadbalance="roundrobin"/>
 
     <dubbo:service interface="com.dubbo.demo.provider.api.UserService" ref="newUserService" version="1.0.0"/>
     <!--<dubbo:service group="user" interface="com.dubbo.demo.provider.api.UserService" ref="userService"/>-->
