@@ -1,13 +1,4 @@
-/*
- * Copyright (C), 2002-2019, 苏宁易购电子商务有限公司
- * Author:   14060860-李世辉
- * FileName: NewUserServiceImpl
- * Date:     2019/12/6  19:25
- * Description: //模块目的、功能描述
- * History: //修改记录
- * <author>      <time>      <version>    <desc>
- * 修改人姓名             修改时间            版本号                  描述
- */
+
 package com.dubbo.demo.provider.service.impl;
 
 import com.dubbo.demo.provider.api.UserService;
