@@ -17,7 +17,7 @@
     <properties>
         <java.version>1.8</java.version>
         <dubbo.demo.api.version>0.0.1-SNAPSHOT</dubbo.demo.api.version>
-        <spring.boot.version>2.2.1.RELEASE</spring.boot.version>
+        <spring.boot.version>2.5.12</spring.boot.version>
         <apache.dubbo.spring.boot.starter.vsersion>2.7.3</apache.dubbo.spring.boot.starter.vsersion>
         <dubbo.dependencies.zookeeper.vsersion>2.7.4</dubbo.dependencies.zookeeper.vsersion>
     </properties>
